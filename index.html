@@ -3,23 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Dungeon Crawler</title>
+    <title>Simple 1st Person Crawler</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Simple Dungeon Crawler</h1>
+    <h1>Simple 1st Person Crawler</h1>
     <div class="game-container">
-        <div id="game-board">
+        <div id="first-person-view">
+            <div class="view-row">
+                <div id="view-left-diag" class="view-cell"></div>
+                <div id="view-ahead" class="view-cell"></div>
+                <div id="view-right-diag" class="view-cell"></div>
             </div>
+             <div id="mini-map-container">
+                 Mini-Map:
+                 <div id="mini-map"></div>
+             </div>
+        </div>
+
         <div id="info-panel">
             <h2>Status</h2>
             <p>HP: <span id="player-hp">--</span> / <span id="player-max-hp">--</span></p>
             <p>Shield: <span id="shield-status">Down</span></p>
-            <p>Enemies Remaining: <span id="enemy-count">--</span></p>
+            <p>Facing: <span id="player-direction">North</span></p> <p>Enemies Remaining: <span id="enemy-count">--</span></p>
             <hr>
             <h2>Log</h2>
             <ul id="game-log">
-                <li>Welcome! Use Arrow Keys to move, Spacebar to toggle shield.</li>
+                <li>Welcome! Use Arrow Keys to move/turn, Spacebar for shield.</li>
             </ul>
              <p id="game-over" class="hidden">GAME OVER</p>
         </div>
