@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Dungeon Crawler</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Simple Dungeon Crawler</h1>
+    <div class="game-container">
+        <div id="game-board">
+            </div>
+        <div id="info-panel">
+            <h2>Status</h2>
+            <p>HP: <span id="player-hp">--</span> / <span id="player-max-hp">--</span></p>
+            <p>Shield: <span id="shield-status">Down</span></p>
+            <p>Enemies Remaining: <span id="enemy-count">--</span></p>
+            <hr>
+            <h2>Log</h2>
+            <ul id="game-log">
+                <li>Welcome! Use Arrow Keys to move, Spacebar to toggle shield.</li>
+            </ul>
+             <p id="game-over" class="hidden">GAME OVER</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
