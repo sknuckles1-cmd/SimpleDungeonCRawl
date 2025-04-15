@@ -1,0 +1,107 @@
+body {
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.game-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+#game-board {
+    display: grid;
+    /* Grid columns/rows will be set by JS */
+    border: 2px solid #555;
+    background-color: #ccc;
+    width: fit-content; /* Adjust size based on content */
+    height: fit-content;
+}
+
+.tile {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+    border: 1px solid #eee; /* Optional: visual grid lines */
+}
+
+.floor {
+    background-color: #a0a0a0;
+    color: #a0a0a0; /* Hide the '.' */
+}
+
+.wall {
+    background-color: #444;
+    color: #444; /* Hide the '#' */
+}
+
+.player {
+    background-color: blue;
+    color: white;
+    border-radius: 50%; /* Make player round */
+}
+
+.enemy {
+    background-color: red;
+    color: white;
+}
+
+#info-panel {
+    width: 250px;
+    background-color: #e0e0e0;
+    padding: 15px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+#game-log {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 150px; /* Limit log height */
+    overflow-y: auto; /* Add scrollbar if needed */
+    font-size: 0.9em;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+#game-log li {
+    padding: 2px 5px;
+    border-bottom: 1px dashed #ddd;
+}
+
+#game-log li:first-child {
+    font-weight: bold; /* Highlight latest message */
+}
+
+#shield-status.active {
+    color: green;
+    font-weight: bold;
+}
+
+#shield-status.inactive {
+    color: orange;
+}
+
+#game-over {
+    color: red;
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
