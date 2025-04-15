@@ -11,51 +11,126 @@ h1, h2 {
 .game-container {
     display: flex;
     justify-content: center;
+    align-items: flex-start; /* Align items to top */
     gap: 20px;
     margin-top: 20px;
 }
 
-#game-board {
-    display: grid;
-    /* Grid columns/rows will be set by JS */
-    border: 2px solid #555;
-    background-color: #ccc;
-    width: fit-content; /* Adjust size based on content */
-    height: fit-content;
+/* --- First Person Viewport --- */
+#first-person-view {
+    width: 300px; /* Adjust as needed */
+    height: 200px; /* Adjust as needed */
+    border: 5px solid #333;
+    background-color: #555; /* Darker background for the view */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center rows vertically */
+    align-items: center; /* Center rows horizontally */
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative; /* Needed for absolute positioning of mini-map */
 }
 
-.tile {
-    width: 30px;
-    height: 30px;
+.view-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 5px; /* Spacing between rows if multiple */
+}
+
+.view-cell {
+    width: 80px;
+    height: 100px;
+    border: 2px solid #888;
+    margin: 0 3px; /* Spacing between cells */
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 2em;
     font-weight: bold;
-    font-size: 18px;
-    border: 1px solid #eee; /* Optional: visual grid lines */
-}
-
-.floor {
-    background-color: #a0a0a0;
-    color: #a0a0a0; /* Hide the '.' */
-}
-
-.wall {
-    background-color: #444;
-    color: #444; /* Hide the '#' */
-}
-
-.player {
-    background-color: blue;
     color: white;
-    border-radius: 50%; /* Make player round */
+    transition: background-color 0.2s ease; /* Smooth transitions */
 }
 
-.enemy {
-    background-color: red;
+/* Size adjustments for perspective illusion */
+#view-ahead {
+    width: 100px;
+    height: 120px;
+    border-width: 3px;
+    position: relative; /* To layer content */
+    z-index: 10; /* Bring forward */
+}
+#view-left-diag, #view-right-diag {
+    width: 70px;
+    height: 90px;
+    opacity: 0.85; /* Slightly faded */
+    position: relative;
+    z-index: 5;
+}
+/* Styles for optional side views */
+/* .view-cell.side {
+    width: 60px;
+    height: 80px;
+    opacity: 0.7;
+}
+.view-cell.player-location {
+     width: 60px;
+     height: 80px;
+     border: none;
+     color: #ddd;
+     font-size: 1.5em;
+} */
+
+
+/* --- View Cell Content Styles --- */
+.view-floor {
+    background-color: #7d7d7d; /* Floor color */
+    border-color: #999;
+}
+.view-wall {
+    background: linear-gradient(to bottom, #666, #444); /* Wall texture */
+    border-color: #333;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+.view-enemy {
+    background-color: #b00; /* Enemy color */
+    border-color: #f00;
     color: white;
+    text-shadow: 0 0 5px black;
+}
+.view-empty { /* For areas outside the map */
+    background-color: #222;
+    border-color: #000;
 }
 
+/* --- Mini Map --- */
+#mini-map-container {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 1px solid #ccc;
+    padding: 3px;
+    font-size: 0.7em;
+    color: #eee;
+}
+#mini-map {
+    display: grid;
+    /* grid cols/rows set by JS */
+    gap: 1px;
+}
+.map-tile {
+    width: 5px;
+    height: 5px;
+    font-size: 3px; /* Hide text */
+}
+.map-floor { background-color: #666; }
+.map-wall { background-color: #333; }
+.map-player { background-color: blue; border-radius: 50%;}
+.map-enemy { background-color: red; border-radius: 50%;}
+
+
+/* --- Info Panel (mostly unchanged) --- */
 #info-panel {
     width: 250px;
     background-color: #e0e0e0;
@@ -68,40 +143,18 @@ h1, h2 {
     list-style: none;
     padding: 0;
     margin: 0;
-    height: 150px; /* Limit log height */
-    overflow-y: auto; /* Add scrollbar if needed */
+    height: 150px;
+    overflow-y: auto;
     font-size: 0.9em;
     background-color: #f8f8f8;
     border: 1px solid #ccc;
     margin-top: 10px;
 }
+#game-log li { padding: 2px 5px; border-bottom: 1px dashed #ddd; }
+#game-log li:first-child { font-weight: bold; }
 
-#game-log li {
-    padding: 2px 5px;
-    border-bottom: 1px dashed #ddd;
-}
+#shield-status.active { color: green; font-weight: bold; }
+#shield-status.inactive { color: orange; }
 
-#game-log li:first-child {
-    font-weight: bold; /* Highlight latest message */
-}
-
-#shield-status.active {
-    color: green;
-    font-weight: bold;
-}
-
-#shield-status.inactive {
-    color: orange;
-}
-
-#game-over {
-    color: red;
-    font-weight: bold;
-    font-size: 1.5em;
-    text-align: center;
-    margin-top: 20px;
-}
-
-.hidden {
-    display: none;
-}
+#game-over { color: red; font-weight: bold; font-size: 1.5em; text-align: center; margin-top: 20px; }
+.hidden { display: none; }
